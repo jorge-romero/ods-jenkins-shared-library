@@ -12,7 +12,7 @@ class Context implements IContext {
     private Logger logger
 
     private def artifactUriStore = [builds: [:], deployments: [:]]
-    
+
     private boolean localCheckoutEnabled
 
     Context(def script, Map config, Logger logger, boolean localCheckoutEnabled = true) {
@@ -134,7 +134,7 @@ class Context implements IContext {
         config.gitCommitAuthor = retrieveGitCommitAuthor()
         config.gitCommitMessage = retrieveGitCommitMessage()
         config.gitCommitTime = retrieveGitCommitTime()
-        config.tagversion = "${config.buildNumber}-${config.gitCommit.take(8)}"
+        config.tagversion = "${config.gitCommit.take(10)}"
 
         if (!config.containsKey('testResults')) {
             config.testResults = ''
@@ -565,7 +565,7 @@ class Context implements IContext {
     public Map<String, Object> getBuildArtifactURIs() {
         return artifactUriStore.asImmutable()
     }
-    
+
     public void addArtifactURI(String key, value) {
         artifactUriStore.put(key, value)
     }
@@ -573,7 +573,7 @@ class Context implements IContext {
     public void addBuildToArtifactURIs (String buildConfigName, Map <String, String> buildInformation) {
         artifactUriStore.builds [buildConfigName] = buildInformation
     }
-    
+
     public void addDeploymentToArtifactURIs (String deploymentConfigName, Map deploymentInformation) {
         artifactUriStore.deployments [deploymentConfigName] = deploymentInformation
     }
@@ -608,7 +608,7 @@ class Context implements IContext {
             kvMap
         }
     }
-    
+
     // set the application domain
     void setOpenshiftApplicationDomain (String domain) {
         config.domain = domain
