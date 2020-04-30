@@ -184,7 +184,7 @@ When you write stages, you have access to both global variables (defined without
 | Credentials identifier (Credentials are created and named automatically by the OpenShift Jenkins plugin).
 
 | tagversion
-| The tagversion is made up of the build number and the first 8 chars of the commit SHA.
+| The tagversion is made up of the first 10 chars of the commit SHA.
 
 | notifyNotGreen
 | Whether to send notifications if the build is not successful.
